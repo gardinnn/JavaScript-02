@@ -19,14 +19,8 @@ function adicionarTarefa() {
 
       tarefas.push(tarefa)
       renderizartarefas()
-      
-      // Cria um novo item (li) e insere na (lista ul)
      
     }
-    
-    
-
-    
     // Limpa o input do usuario
     inputtarefa.value = ""
 
@@ -44,13 +38,52 @@ function renderizartarefas(){
 
   // for(iterador; condição; frequencia)
 
-  let i = 0
-  for(i; i < tarefas.length; i++){
+  
+  for(let i = 0; i < tarefas.length; i++){
     let novatarefa = document.createElement('li')
     novatarefa.textContent = tarefas[i]
+    
+      
+    
+    let botaoremover = document.createElement("button")
+    botaoremover.className = "remover"
+    botaoremover.textContent = "Remover"
+    botaoremover.onclick = () => removertarefa(i)
+    
+    
+
+    let botaoeditar = document.createElement("button")
+    botaoeditar.className = "editar"
+    botaoeditar.textContent = "Editar"
+    botaoeditar.onclick = () => editartarefa(i)
+
+    novatarefa.appendChild(botaoremover)
+    novatarefa.appendChild(botaoeditar)
     listatarefas.appendChild(novatarefa)
   }
 }
+
+function removertarefa(i){
+  tarefas.splice(i, 1)
+  renderizartarefas()
+}
+
+function editartarefa(i){
+  let tarefaeditada = prompt("Edite a tarefa:")
+  if(tarefaeditada.trim() !== ""){
+    tarefas[i] = tarefaeditada
+    renderizartarefas()
+  }
+}
+
+
+function limparlista(){
+  tarefas.length = 0
+  renderizartarefas()
+  const mensagem = document.getElementById('mensagem')
+  mensagem.textContent = "Lista excluída"
+}
+
 
 
   
